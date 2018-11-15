@@ -72,9 +72,9 @@ class Details extends React.Component {
     render(){
         return (
             <div>
-                    { <Table userDetail={this.state.userDetails} /> }<br/>
-                    <h3>task</h3>
-                    {this.state.userTasks.map(task => <p key={task.id}>{task.title}</p> )}<br/>
+                    { <Table userDetail={this.state.userDetails} /> }
+                    <h3><span>task</span> <span>completed</span></h3>   
+                    {this.state.userTasks.map(task =><div key={task.id}> <span key={task.id}>{task.title} </span><span>{ task.completed.toString()}</span></div> )}<br/>
                     <Link to={"/users"}>back</Link>
             </div>
         )
