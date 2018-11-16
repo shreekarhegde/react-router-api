@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import TableForUser from './tableForUser';
 import TableForTask from './tableForTask';
 
@@ -21,24 +20,29 @@ class Details extends React.Component {
             this.setState({
                 userDetails: response.data
             })
+           
         })
         axios.get(`https://jsonplaceholder.typicode.com/todos?userId=${this.props.match.params.id}`).then((response) => {
           this.setState({
               userTasks: response.data
           })
+          this.setState({
+            newUserTasks: this.state.userTasks
+        })
       })
     }
-
+    
+   
     handleChange(e) {
         e.persist();
         let selectedValue = e.target.value;
         this.setState({
             newUserTasks: this.state.userTasks.filter(task => task.completed.toString() === selectedValue)
         })
-        
     }
 
     render(){
+       
         return (
             <div>
                     { <TableForUser userDetail={this.state.userDetails}/> }
