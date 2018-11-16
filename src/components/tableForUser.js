@@ -2,7 +2,6 @@ import React from 'react';
 const TableForUser = (props) => (
     <table border="1">
     <thead>
-
     </thead>
     <tbody>
         <tr>
