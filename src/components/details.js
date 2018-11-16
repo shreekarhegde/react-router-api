@@ -27,8 +27,8 @@ class Details extends React.Component {
               userTasks: response.data
           })
           this.setState({
-            newUserTasks: this.state.userTasks
-        })
+            newUserTasks: this.state.userTasks.slice()
+          })
       })
     }
     
@@ -36,9 +36,16 @@ class Details extends React.Component {
     handleChange(e) {
         e.persist();
         let selectedValue = e.target.value;
-        this.setState({
-            newUserTasks: this.state.userTasks.filter(task => task.completed.toString() === selectedValue)
-        })
+        if(selectedValue === 'all'){
+            this.setState({
+                newUserTasks: this.state.userTasks
+            })
+            
+        }else{
+            this.setState({
+                newUserTasks: this.state.userTasks.filter(task => task.completed.toString() === selectedValue.toString())
+            })
+        } 
     }
 
     render(){
@@ -50,7 +57,7 @@ class Details extends React.Component {
                                                                 <thead>
                                                                     <tr>
                                                                     <th>
-                                                                        task
+                                                                        task- {this.state.newUserTasks.length}
                                                                     </th>
                                                                     <th>
                                                                         <span>completed</span> 
@@ -61,6 +68,9 @@ class Details extends React.Component {
                                                                             </option>
                                                                             <option value="false">
                                                                                 false
+                                                                            </option>
+                                                                            <option value="all">
+                                                                                all
                                                                             </option>
                                                                         </select> 
                                                                     </th>
